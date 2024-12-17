@@ -10,7 +10,7 @@ import com.codeborne.selenide.SelenideElement;
 public class HomePage {
     // Локатор обновлен для поля поиска
     private SelenideElement searchField = $("[name='ss']");
-    private SelenideElement searchButton = $("[type='submit']");
+    private SelenideElement searchButton = $x("//button[.//span[text()='Найти']]");
 
     public HomePage openHomePage() {
         open("https://booking.com/");
@@ -27,7 +27,7 @@ public class HomePage {
     }
 
     public SearchResultsPage clickSearchButton() {
-        $x("//button[.//span[text()='Найти']]").click();
+        searchButton.click();
         return new SearchResultsPage();
     }
 }

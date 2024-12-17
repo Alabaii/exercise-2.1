@@ -11,13 +11,13 @@ import com.codeborne.selenide.ElementsCollection;
 import java.util.Objects;
 
 public class SearchResultsPage {
-    private SelenideElement searchHeader = $("[name='ss']");
-    private SelenideElement allFiltersButton = $("[data-filters-group='class']");
-    private SelenideElement fiveStarFilter = $("[data-filters-item='class:class=5']");
-    private ElementsCollection hotelRatings = $$("[data-testid='rating-stars']");
+    private final SelenideElement searchHeader = $("[name='ss']");
+    private final SelenideElement allFiltersButton = $("[data-filters-group='class']");
+    private final SelenideElement fiveStarFilter = $("[data-filters-item='class:class=5']");
+    private final ElementsCollection hotelRatings = $$("[data-testid='rating-stars']");
 
     public SearchResultsPage verifySearchHeaderContains(String expectedQuery) {
-        String enteredValue = $("input[name='ss']").getValue(); // ID поля ввода
+        String enteredValue = searchHeader.getValue(); // ID поля ввода
 
         // Сравниваем с ожидаемым значением
         if (Objects.equals(expectedQuery, enteredValue)){
@@ -36,12 +36,15 @@ public class SearchResultsPage {
     }
 
     public SearchResultsPage verifyAllHotelsAreFiveStar() {
-        hotelRatings.forEach(rating -> {
+        // Используем обычный цикл for для обхода элементов
+        for (SelenideElement rating : hotelRatings) {
             // Поднимаемся на уровень выше, чтобы получить родительский элемент
             SelenideElement parentElement = rating.closest("div"); // Поднимитесь на уровень выше
             parentElement.shouldHave(attribute("aria-label", "5 из 5"));  // Проверяем атрибут aria-label
-        });
+        }
         return this;
     }
+
+
 
 }
