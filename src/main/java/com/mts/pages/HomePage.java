@@ -16,6 +16,10 @@ public class HomePage {
         open("https://booking.com/");
         return this;
     }
+    public HomePage rejectCookies() {
+        $("#onetrust-reject-all-handler").click(); // Нажимаем на кнопку с указанным id
+        return this;
+    }
 
     public HomePage enterSearchQuery(String query) {
         searchField.setValue(query);
@@ -23,7 +27,7 @@ public class HomePage {
     }
 
     public SearchResultsPage clickSearchButton() {
-        searchButton.click();
+        $x("//button[.//span[text()='Найти']]").click();
         return new SearchResultsPage();
     }
 }

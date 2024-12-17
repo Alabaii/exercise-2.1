@@ -31,12 +31,29 @@
             <version>2.18.1</version>
         </dependency>
 
-        <!-- Allure Selenide -->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
-            <version>2.18.1</version>
-        </dependency>
+            <!-- Зависимость для Allure Selenide -->
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-selenide</artifactId>
+                <version>2.13.8</version> <!-- Используйте актуальную версию -->
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Зависимость для Allure JUnit5 -->
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-junit5</artifactId>
+                <version>2.13.8</version> <!-- Используйте актуальную версию -->
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Зависимость для Allure Commandline (для генерации отчета) -->
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-commandline</artifactId>
+                <version>2.13.8</version>
+                <scope>test</scope>
+            </dependency>
         <!-- AssertJ для утверждений -->
         <dependency>
             <groupId>org.assertj</groupId>
@@ -61,27 +78,29 @@
 
     <build>
         <plugins>
-            <!-- Плагин Allure для генерации отчета -->
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.14.0</version> <!-- Обновленная версия -->
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>serve</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <useJUnitPlatform>true</useJUnitPlatform>
+                    <useFile>false</useFile>
                 </configuration>
             </plugin>
+
+        <!-- Плагин Allure для генерации отчета -->
+        <plugin>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>2.14.0</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>serve</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 
